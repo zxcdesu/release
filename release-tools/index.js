@@ -1,1 +1,2 @@
-console.log(process.argv);
+const version = process.argv[2];
+console.log(version);
