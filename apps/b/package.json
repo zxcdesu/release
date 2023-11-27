@@ -2,8 +2,8 @@
   "name": "b",
   "version": "1.0.0",
   "scripts": {
-    "lib:build": "echo \"building lib a...\"",
-    "app:build": "echo \"building app a...\""
+    "lib:build": "echo \"building lib b...\"",
+    "app:build": "echo \"building app b...\""
   },
   "dependencies": {
     "a": "1.0.0",
