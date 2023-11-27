@@ -5,5 +5,7 @@
     "lib:build": "echo \"building lib a...\"",
     "app:build": "echo \"building app a...\""
   },
-  "dependencies": {},
+  "dependencies": {
+    "c": "1.0.0"
+  },
 }
