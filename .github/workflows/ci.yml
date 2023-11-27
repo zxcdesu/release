@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      release: ${{ steps.release.outputs }}
+      release: ${{ steps.release.outputs.release }}
 
     steps:
       - uses: actions/checkout@v3
@@ -26,9 +26,9 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Release
-        id: release
-        run: yarn release $GITHUB_REF_NAME >> $GITHUB_OUTPUT
+      - id: release
+        name: Release
+        run: echo release=$(yarn release ${{ github.ref_name }}) >> $GITHUB_OUTPUT
 
   docker:
     runs-on: ubuntu-latest
