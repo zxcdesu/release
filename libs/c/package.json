@@ -4,5 +4,7 @@
   "scripts": {
     "lib:build": "echo \"building lib c...\""
   },
-  "dependencies": {},
+  "dependencies": {
+    "c": "1.0.0"
+  },
 }
