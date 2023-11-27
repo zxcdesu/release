@@ -1,0 +1,14 @@
+{
+  "name": "release",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "libs/*"
+    ]
+  },
+  "scripts": {
+    "release": "node release-tools/index.js"
+  }
+}
