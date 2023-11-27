@@ -5,5 +5,5 @@ console.log(
   'current',
   version,
   'previous',
-  execSync(`git tag --sort=-creatordate | grep -A 1 ${version} | tail -n 1`, { encoding: 'utf8' })
+  execSync(`git describe --abbrev=0 --tags ${version}^`, { encoding: 'utf8' })
 );
