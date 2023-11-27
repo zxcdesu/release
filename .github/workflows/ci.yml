@@ -23,4 +23,4 @@ jobs:
         run: yarn
 
       - name: Release
-        run: yarn release
+        run: yarn release ${{ github.ref_name }}
