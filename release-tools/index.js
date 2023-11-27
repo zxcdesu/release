@@ -10,5 +10,4 @@ const diff = execSync(
   .trim()
   .split("\n");
 
-console.log(1, version);
-console.log(2, diff);
+console.log(diff);
