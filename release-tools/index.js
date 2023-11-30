@@ -62,7 +62,8 @@ function patchRecursive(workspaces, libs, apps, name, version) {
   });
 }
 
-const version = process.argv[2];
+let version = process.argv[2];
+
 const diff = execSync(
   `git --no-pager diff $(git describe --abbrev=0 --tags ${version}^) --minimal --name-only`,
 )
@@ -96,9 +97,17 @@ libs.forEach((workspace1) => {
 });
 
 if (libs.size + apps.size > 0) {
-  execSync("git add -A");
+  execSync("git add --all");
   execSync(`git commit -m ${version}`);
-  execSync("git push origin HEAD:main");
+  execSync("git push origin main");
+
+  execSync(`git tag -d ${version}`);
+  execSync(`git push --delete origin ${version}`);
+  
+  version = version.slice(1);
+
+  execSync(`git tag -a -m ${version} ${version}`);
+  execSync(`git push origin ${version}`);
 
   console.log(libs);
 
