@@ -97,8 +97,10 @@ libs.forEach((workspace1) => {
 
 if (libs.size + apps.size > 0) {
   execSync("git add -A");
-  execSync(`git commit -m "v${version}"`);
-  execSync('git push origin HEAD:main');
+  execSync(`git commit -m ${version}`);
+  execSync("git push origin HEAD:main");
+
+  console.log(libs);
 
   Array.from(libs).map((workspace1) => {
     const lib = workspaces.find(
@@ -106,6 +108,8 @@ if (libs.size + apps.size > 0) {
     ).name;
     return execSync(`yarn workspace ${lib} run lib:build`);
   });
+
+  console.log(apps);
 
   if (apps.size) setOutput("DOCKER", JSON.stringify(apps));
 } else console.log("no changes found");
