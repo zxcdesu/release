@@ -100,14 +100,12 @@ if (libs.size + apps.size > 0) {
   execSync(`git commit -m "v${version}"`);
   execSync('git push origin')
 
-  await Promise.all(
-    Array.from(libs).map((workspace1) => {
-      const lib = workspaces.find(
-        (workspace2) => join(workspace2.root, workspace2.workspace) === workspace1
-      ).name;
-      return exec(`yarn workspace ${lib} run lib:build`);
-    })
-  );
+  Array.from(libs).map((workspace1) => {
+    const lib = workspaces.find(
+      (workspace2) => join(workspace2.root, workspace2.workspace) === workspace1
+    ).name;
+    return execSync(`yarn workspace ${lib} run lib:build`);
+  });
 
   if (apps.size) setOutput("DOCKER", JSON.stringify(apps));
 } else console.log("no changes found");
