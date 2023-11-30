@@ -1,11 +1,11 @@
 {
   "name": "a",
-  "version": "v2.0.25",
+  "version": "v2.0.26",
   "scripts": {
     "lib:build": "echo \"building lib a...\"",
     "app:build": "echo \"building app a...\""
   },
   "dependencies": {
-    "c": "v2.0.25"
+    "c": "v2.0.26"
   }
 }
