@@ -70,7 +70,7 @@ const prevVersion = execSync(`git describe --abbrev=0 --tags ${nextVersion}^`)
 console.log("next version is", nextVersion);
 console.log("prev version is", prevVersion);
 
-const diff = execSync(`git --no-pager diff ${nextVersion} $${prevVersion} --minimal --name-only`)
+const diff = execSync(`git --no-pager diff $${prevVersion} --minimal --name-only`)
   .toString("utf8")
   .trim()
   .split("\n");
