@@ -36,4 +36,4 @@ jobs:
     steps:
       - env:
           RELEASE: ${{ needs.build.outputs.release }}
-        run: echo "$RELEASE"
+        run: echo "release is $RELEASE"
