@@ -62,14 +62,14 @@ function patchRecursive(workspaces, libs, apps, name, version) {
   });
 }
 
-const version = process.argv[2];
-const lastVersion = execSync(`git describe --abbrev=0 --tags ${version}^`).toString("utf8");
+const nextVersion = process.argv[2];
+const prevVersion = execSync(`git describe --abbrev=0 --tags ${nextVersion}^`).toString("utf8");
 
-console.log("current version is", version);
-console.log("found last version is", lastVersion);
+console.log("next version is", nextVersion);
+console.log("prev version is", prevVersion);
 
 const diff = execSync(
-  `git --no-pager diff $(git describe --abbrev=0 --tags ${version}^) --minimal --name-only`,
+  `git --no-pager diff ${nextVersion} $${prevVersion} --minimal --name-only`,
 )
   .toString("utf8")
   .trim()
@@ -87,13 +87,7 @@ for (const path of diff) {
 
 const workspaces = [].concat(getWorkspaces('apps'), getWorkspaces('libs'))
 
-console.log("workspaces", workspaces);
-console.log("libs", libs);
-console.log("apps", apps);
-
 libs.forEach((workspace1) => {
-  console.log("workspace", workspace1);
-
   patchRecursive(
     workspaces,
     libs,
@@ -102,15 +96,17 @@ libs.forEach((workspace1) => {
       (workspace2) =>
         join(workspace2.root, workspace2.workspace) === workspace1
     ).name,
-    version,
+    nextVersion,
   );
 });
 
+console.log("updated libs", libs);
+console.log("updated apps", apps);
+
 if (libs.size + apps.size > 0) {
   execSync("git add --all");
-  execSync(`git commit -m ${version}`);
+  execSync(`git commit -m ${nextVersion}`);
   execSync("git push origin HEAD:main");
-
 
   Array.from(libs).map((workspace1) => {
     const lib = workspaces.find(
@@ -119,13 +115,12 @@ if (libs.size + apps.size > 0) {
     return execSync(`yarn workspace ${lib} run lib:build`);
   });
 
-
   if (apps.size) setOutput("DOCKER", JSON.stringify(Array.from(apps)));
 } else console.log("no changes found");
 
-execSync(`git tag -d ${version}`);
-execSync(`git push --delete origin ${version}`);
+execSync(`git tag -d ${nextVersion}`);
+execSync(`git push --delete origin ${nextVersion}`);
 
-const actualVersion = version.slice(1);
-execSync(`git tag -a -m ${actualVersion} ${actualVersion}`);
-execSync(`git push origin ${actualVersion}`);
+const version = nextVersion.slice(1);
+execSync(`git tag -a -m ${version} ${version}`);
+execSync(`git push origin ${version}`);

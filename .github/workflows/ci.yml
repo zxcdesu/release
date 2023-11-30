@@ -28,8 +28,8 @@ jobs:
 
       - name: Login to GitHub
         run: |
-          git config --global user.email "xanedesu@gmail.com"
-          git config --global user.name "xanedesu"
+          git config --global user.email "runner@github.com"
+          git config --global user.name "runner"
 
       - name: Release
         id: release
@@ -42,6 +42,7 @@ jobs:
     strategy:
       matrix:
         docker: ${{ fromJson(needs.build.outputs.docker) }}
+
     steps:
       - name: Building docker images
         run: echo "building ${{ matrix.docker }}"
