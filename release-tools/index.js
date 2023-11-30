@@ -65,7 +65,7 @@ function patchRecursive(workspaces, libs, apps, name, version) {
 let version = process.argv[2];
 
 console.log(`current version is ${version}`);
-console.log(`found last version is ${execSync("git describe --abbrev=0 --tags ${version}^").toString("utf8")}`);
+console.log(`found last version is ${execSync(`git describe --abbrev=0 --tags ${version}^`).toString("utf8")}`);
 
 const diff = execSync(
   `git --no-pager diff $(git describe --abbrev=0 --tags ${version}^) --minimal --name-only`,
