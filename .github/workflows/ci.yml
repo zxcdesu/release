@@ -38,7 +38,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     needs: [ build ]
-    if: needs.build.outputs.docker?.length > 0
+    if: needs.build.outputs.docker != ''
     strategy:
       matrix:
         docker: ${{ fromJson(needs.build.outputs.docker) }}
