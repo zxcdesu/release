@@ -87,7 +87,11 @@ for (const path of diff) {
 
 const workspaces = [].concat(getWorkspaces('apps'), getWorkspaces('libs'))
 
+console.log(workspaces);
+
 libs.forEach((workspace1) => {
+  console.log(`workspace ${workspace1}`);
+
   patchRecursive(
     workspaces,
     libs,
