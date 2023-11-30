@@ -33,9 +33,10 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     needs: [ build ]
+    if: needs.build.outputs.docker != ''
     strategy:
       matrix:
         docker: ${{ fromJson(needs.build.outputs.docker) }}
     steps:
-      - name: 
+      - name: Building docker images
         run: echo "building ${{ matrix.docker }}"
