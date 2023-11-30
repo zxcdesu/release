@@ -64,10 +64,13 @@ function patchRecursive(workspaces, libs, apps, name, version) {
 
 let version = process.argv[2];
 
+console.log(`current version is ${version}`);
+console.log(`found last version is ${execSync("git describe --abbrev=0 --tags ${version}^").toString("utf8")}`);
+
 const diff = execSync(
   `git --no-pager diff $(git describe --abbrev=0 --tags ${version}^) --minimal --name-only`,
 )
-  .toString('utf8')
+  .toString("utf8")
   .trim()
   .split("\n");
 
@@ -76,7 +79,7 @@ const libs = new Set();
 
 for (const path of diff) {
   const [root, workspace] = path.split("/");
-  if (path.startsWith("libs/") || path.startsWith(`apps/${workspace}/lib/`))
+  if (path.startsWith("libs/") || path.startsWith(`apps/${workspace}/lib/`));
     libs.add(join(root, workspace));
   if (path.startsWith("apps/")) apps.add(workspace);
 }
