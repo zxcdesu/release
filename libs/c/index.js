@@ -1,1 +1,2 @@
-console.log('lib c');
+const LIB = "c";
+console.log(`lib ${LIB}`);
