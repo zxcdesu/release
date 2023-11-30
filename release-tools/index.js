@@ -62,10 +62,11 @@ function patchRecursive(workspaces, libs, apps, name, version) {
   });
 }
 
-let version = process.argv[2];
+const version = process.argv[2];
+const lastVersion = execSync(`git describe --abbrev=0 --tags ${version}^`).toString("utf8");
 
 console.log(`current version is ${version}`);
-console.log(`found last version is ${execSync(`git describe --abbrev=0 --tags ${version}^`).toString("utf8")}`);
+console.log(`found last version is ${lastVersion}`);
 
 const diff = execSync(
   `git --no-pager diff $(git describe --abbrev=0 --tags ${version}^) --minimal --name-only`,
@@ -121,7 +122,6 @@ if (libs.size + apps.size > 0) {
 execSync(`git tag -d ${version}`);
 execSync(`git push --delete origin ${version}`);
 
-version = version.slice(1);
-
-execSync(`git tag -a -m ${version} ${version}`);
-execSync(`git push origin ${version}`);
+const actualVersion = version.slice(1);
+execSync(`git tag -a -m ${actualVersion} ${actualVersion}`);
+execSync(`git push origin ${actualVersion}`);
