@@ -26,6 +26,11 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      - name: Login to GitHub
+        run: |
+          git config --global user.email "xanedesu@gmail.com"
+          git config --global user.name "xanedesu"
+
       - name: Release
         id: release
         run: yarn release $GITHUB_REF_NAME
