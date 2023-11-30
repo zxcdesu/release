@@ -111,5 +111,5 @@ if (libs.size + apps.size > 0) {
 
   console.log(apps);
 
-  if (apps.size) setOutput("DOCKER", JSON.stringify(apps));
+  if (apps.size) setOutput("DOCKER", JSON.stringify(Array.from(apps)));
 } else console.log("no changes found");
