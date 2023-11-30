@@ -98,7 +98,7 @@ libs.forEach((workspace1) => {
 if (libs.size + apps.size > 0) {
   execSync("git add -A");
   execSync(`git commit -m "v${version}"`);
-  execSync('git push origin')
+  execSync('git push origin HEAD:main');
 
   Array.from(libs).map((workspace1) => {
     const lib = workspaces.find(
