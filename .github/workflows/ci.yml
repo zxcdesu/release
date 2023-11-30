@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # if: github.actor != ''
     outputs:
       docker: ${{ steps.release.outputs.DOCKER }}
 
@@ -29,8 +28,8 @@ jobs:
 
       - name: Login to GitHub
         run: |
-          git config --global user.email "runner@github.com"
-          git config --global user.name "runner"
+          git config --global user.email "xanedesu@gmail.com"
+          git config --global user.name "xanedesu"
 
       - name: Release
         id: release
