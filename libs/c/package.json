@@ -5,6 +5,6 @@
     "lib:build": "echo \"building lib c...\""
   },
   "dependencies": {
-    "c": "v2.0.25"
+    "a": "v2.0.25"
   }
 }
