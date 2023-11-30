@@ -1,1 +1,1 @@
-console.log("lib c+");
+console.log("lib c");
