@@ -1,10 +1,10 @@
 {
   "name": "c",
-  "version": "1.0.0",
+  "version": "v2.0.13",
   "scripts": {
     "lib:build": "echo \"building lib c...\""
   },
   "dependencies": {
-    "c": "1.0.0"
+    "c": "v2.0.13"
   }
 }
