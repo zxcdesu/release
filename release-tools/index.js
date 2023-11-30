@@ -63,14 +63,14 @@ function patchRecursive(workspaces, libs, apps, name, version) {
 }
 
 const nextVersion = process.argv[2];
-const prevVersion = execSync(`git describe --abbrev=0 --tags ${nextVersion}^`).toString("utf8");
+const prevVersion = execSync(`git describe --abbrev=0 --tags ${nextVersion}^`)
+  .toString("utf8")
+  .trim();
 
 console.log("next version is", nextVersion);
 console.log("prev version is", prevVersion);
 
-const diff = execSync(
-  `git --no-pager diff ${nextVersion} $${prevVersion} --minimal --name-only`,
-)
+const diff = execSync(`git --no-pager diff ${nextVersion} $${prevVersion} --minimal --name-only`)
   .toString("utf8")
   .trim()
   .split("\n");
