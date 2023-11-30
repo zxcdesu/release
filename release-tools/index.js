@@ -119,6 +119,5 @@ if (libs.size + apps.size > 0) {
 execSync(`git tag -d ${nextVersion}`);
 execSync(`git push --delete origin ${nextVersion}`);
 
-// const version = nextVersion.slice(1);
 execSync(`git tag -a -m ${nextVersion} ${nextVersion}`);
 execSync(`git push origin ${nextVersion}`);
