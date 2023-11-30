@@ -67,7 +67,7 @@ const nextVersion = process.argv[2];
 console.log("next version is", nextVersion);
 
 const diff = execSync(
-  `git --no-pager diff $$(git describe --abbrev=0 --tags ${nextVersion}^) --minimal --name-only`,
+  `git --no-pager diff $(git describe --abbrev=0 --tags ${nextVersion}^) --minimal --name-only`,
 )
   .toString("utf8")
   .trim()
