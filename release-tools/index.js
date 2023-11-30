@@ -99,7 +99,7 @@ libs.forEach((workspace1) => {
 if (libs.size + apps.size > 0) {
   execSync("git add --all");
   execSync(`git commit -m ${version}`);
-  execSync("git push origin main");
+  execSync("git push origin HEAD:main");
 
   execSync(`git tag -d ${version}`);
   execSync(`git push --delete origin ${version}`);
