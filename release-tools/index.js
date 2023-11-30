@@ -65,8 +65,8 @@ function patchRecursive(workspaces, libs, apps, name, version) {
 const version = process.argv[2];
 const lastVersion = execSync(`git describe --abbrev=0 --tags ${version}^`).toString("utf8");
 
-console.log(`current version is ${version}`);
-console.log(`found last version is ${lastVersion}`);
+console.log("current version is", version);
+console.log("found last version is", lastVersion);
 
 const diff = execSync(
   `git --no-pager diff $(git describe --abbrev=0 --tags ${version}^) --minimal --name-only`,
@@ -87,10 +87,12 @@ for (const path of diff) {
 
 const workspaces = [].concat(getWorkspaces('apps'), getWorkspaces('libs'))
 
-console.log(workspaces);
+console.log("workspaces", workspaces);
+console.log("libs", libs);
+console.log("apps", apps);
 
 libs.forEach((workspace1) => {
-  console.log(`workspace ${workspace1}`);
+  console.log("workspace", workspace1);
 
   patchRecursive(
     workspaces,
@@ -109,7 +111,6 @@ if (libs.size + apps.size > 0) {
   execSync(`git commit -m ${version}`);
   execSync("git push origin HEAD:main");
 
-  console.log(libs);
 
   Array.from(libs).map((workspace1) => {
     const lib = workspaces.find(
@@ -118,7 +119,6 @@ if (libs.size + apps.size > 0) {
     return execSync(`yarn workspace ${lib} run lib:build`);
   });
 
-  console.log(apps);
 
   if (apps.size) setOutput("DOCKER", JSON.stringify(Array.from(apps)));
 } else console.log("no changes found");
