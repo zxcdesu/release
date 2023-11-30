@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # if: github.actor != ''
+    if: github.actor != ''
     outputs:
       docker: ${{ steps.release.outputs.DOCKER }}
 
