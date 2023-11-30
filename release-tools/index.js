@@ -101,14 +101,6 @@ if (libs.size + apps.size > 0) {
   execSync(`git commit -m ${version}`);
   execSync("git push origin HEAD:main");
 
-  execSync(`git tag -d ${version}`);
-  execSync(`git push --delete origin ${version}`);
-  
-  version = version.slice(1);
-
-  execSync(`git tag -a -m ${version} ${version}`);
-  execSync(`git push origin ${version}`);
-
   console.log(libs);
 
   Array.from(libs).map((workspace1) => {
@@ -122,3 +114,11 @@ if (libs.size + apps.size > 0) {
 
   if (apps.size) setOutput("DOCKER", JSON.stringify(Array.from(apps)));
 } else console.log("no changes found");
+
+execSync(`git tag -d ${version}`);
+execSync(`git push --delete origin ${version}`);
+
+version = version.slice(1);
+
+execSync(`git tag -a -m ${version} ${version}`);
+execSync(`git push origin ${version}`);
