@@ -28,7 +28,7 @@ jobs:
 
       - id: release
         name: Release
-        run: echo "release=\"$(yarn release $GITHUB_REF_NAME)\"" >> $GITHUB_OUTPUT
+        run: yarn release $GITHUB_REF_NAME
 
   docker:
     runs-on: ubuntu-latest
