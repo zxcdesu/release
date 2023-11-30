@@ -78,7 +78,7 @@ const libs = new Set();
 
 for (const path of diff) {
   const [root, workspace] = path.split("/");
-  if (path.startsWith("libs/") || path.startsWith(`apps/${workspace}/lib/`))
+  if (path.startsWith("libs/") || path.startsWith(`apps/${workspace}/lib/`)) // или package.json
     libs.add(join(root, workspace));
   if (path.startsWith("apps/")) apps.add(workspace);
 }
