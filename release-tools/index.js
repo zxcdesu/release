@@ -109,16 +109,29 @@ console.log("updated apps", apps);
 console.log("updated libs", libs);
 
 if (apps.size + libs.size > 0) {
-  execSync("git add --all", { encoding: "utf8" });
-  execSync(`git commit -m ${nextVersion}`, { encoding: "utf8" });
-  execSync("git push origin HEAD:main", { encoding: "utf8" });
+  execSync("git add --all", {
+    encoding: "utf8",
+  });
+  execSync(`git commit -m ${nextVersion}`, {
+    encoding: "utf8",
+  });
+  execSync("git push origin HEAD:main", {
+    encoding: "utf8",
+  });
 
   if (apps.size) setOutput("DOCKER", JSON.stringify(Array.from(apps)));
   if (libs.size) setOutput("NPM", Array.from(libs).join(' '));
 } else console.log("no changes found");
 
-execSync(`git tag -d ${nextVersion}`, { encoding: "utf8" });
-execSync(`git push --delete origin ${nextVersion}`, { encoding: "utf8" });
-
-execSync(`git tag -a -m ${nextVersion} ${nextVersion}`, { encoding: "utf8" });
-execSync(`git push origin ${nextVersion}`, { encoding: "utf8" });
+execSync(`git tag -d ${nextVersion}`, {
+  encoding: "utf8",
+});
+execSync(`git push --delete origin ${nextVersion}`, {
+  encoding: "utf8",
+});
+execSync(`git tag -a -m ${nextVersion} ${nextVersion}`, {
+  encoding: "utf8",
+});
+execSync(`git push origin ${nextVersion}`, {
+  encoding: "utf8",
+});
