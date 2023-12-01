@@ -27,6 +27,8 @@ function getWorkspaces(root) {
         let result =
           name === packageJson.name && packageJson.version !== version;
 
+        console.log(name, packageJson, result);
+
         if (
           typeof packageJson.dependencies?.[name] !== "undefined" &&
           packageJson.dependencies[name] !== version
