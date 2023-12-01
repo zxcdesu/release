@@ -89,7 +89,7 @@ const workspaces = [].concat(getWorkspaces('apps'), getWorkspaces('libs'))
 
 apps.forEach((workspace1) => {
   const workspace = workspaces.find((workspace2) => workspace2.workspace === workspace1);
-  workspace.patch(workspace.name, version);
+  workspace.patch(workspace.name, nextVersion);
 });
 
 libs.forEach((workspace1) => {
