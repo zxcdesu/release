@@ -1,3 +1,5 @@
+
+
 const {execSync} = require("child_process");
 const {
   appendFileSync,
@@ -67,7 +69,7 @@ const nextVersion = process.argv[2];
 console.log("next version is", nextVersion);
 
 const diff = execSync(
-  `git --no-pager diff $(git describe --abbrev=0 --tags ${nextVersion}^) --minimal --name-only`,
+  `git --no-pager diff ${nextVersion} $(git describe --abbrev=0 --tags ${nextVersion}^) --minimal --name-only`,
   {
     encoding: "utf8"
   },
@@ -93,10 +95,6 @@ apps.forEach((workspace1) => {
 });
 
 libs.forEach((workspace1) => {
-  // пофиксить циклические зависимости
-  // мб в них дело
-  // либа "A" не добавляется в массив измененных либ
-  // если изменение было в либе "C"
   patchRecursive(
     workspaces,
     libs,
