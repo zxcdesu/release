@@ -36,6 +36,7 @@ jobs:
         run: yarn release $GITHUB_REF_NAME
 
       - name: Building npm packages
+        if: steps.release.outputs.NPM != ''
         run: echo "building ${{ steps.release.outputs.NPM }}"
 
   docker:
