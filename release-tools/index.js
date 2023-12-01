@@ -131,7 +131,7 @@ execSync(`git tag -d ${nextVersion}`, {
 execSync(`git push --delete origin ${nextVersion}`, {
   encoding: "utf8",
 });
-execSync(`git tag -a -m ${nextVersion} ${nextVersion}`, {
+execSync(`git tag ${nextVersion} -a -m ${nextVersion}`, {
   encoding: "utf8",
 });
 execSync(`git push origin ${nextVersion}`, {
