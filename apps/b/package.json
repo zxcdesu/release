@@ -1,12 +1,12 @@
 {
   "name": "b",
-  "version": "v4.0.10",
+  "version": "v4.0.11",
   "scripts": {
     "lib:build": "echo \"building lib b...\"",
     "app:build": "echo \"building app b...\""
   },
   "dependencies": {
-    "a": "v4.0.10",
-    "c": "v4.0.10"
+    "a": "v4.0.11",
+    "c": "v4.0.11"
   }
 }
