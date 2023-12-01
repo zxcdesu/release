@@ -93,6 +93,10 @@ apps.forEach((workspace1) => {
 });
 
 libs.forEach((workspace1) => {
+  // пофиксить циклические зависимости
+  // мб в них дело
+  // либа "A" не добавляется в массив измененных либ
+  // если изменение было в либе "C"
   patchRecursive(
     workspaces,
     libs,
