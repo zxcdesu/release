@@ -27,8 +27,6 @@ function getWorkspaces(root) {
         let result =
           name === packageJson.name && packageJson.version !== version;
 
-        console.log(name, packageJson, result);
-
         if (
           typeof packageJson.dependencies?.[name] !== "undefined" &&
           packageJson.dependencies[name] !== version
@@ -88,6 +86,11 @@ for (const path of diff) {
 }
 
 const workspaces = [].concat(getWorkspaces('apps'), getWorkspaces('libs'))
+
+apps.forEach((workspace1) => {
+  const workspace = workspaces.find((workspace2) => workspace2.workspace === workspace1);
+  workspace.patch(workspace.name, version);
+});
 
 libs.forEach((workspace1) => {
   patchRecursive(
