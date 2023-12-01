@@ -35,6 +35,9 @@ jobs:
         id: release
         run: yarn release $GITHUB_REF_NAME
 
+      - name: Building npm packages
+        run: echo "building ${{ steps.release.outputs.NPM }}"
+
   docker:
     runs-on: ubuntu-latest
     needs: [ build ]

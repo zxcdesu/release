@@ -9,8 +9,8 @@ const {
 const {EOL} = require("os");
 const {join} = require("path");
 
-function setOutput(key, value) {
-  appendFileSync(process.env["GITHUB_OUTPUT"], `${key}=${value}`.concat(EOL));
+function setOutput(key, value, output = "GITHUB_OUTPUT") {
+  appendFileSync(process.env[output], `${key}=${value}`.concat(EOL));
 }
 
 function getWorkspaces(root) {
@@ -105,22 +105,16 @@ libs.forEach((workspace1) => {
   );
 });
 
-console.log("updated libs", libs);
 console.log("updated apps", apps);
+console.log("updated libs", libs);
 
-if (libs.size + apps.size > 0) {
+if (apps.size + libs.size > 0) {
   execSync("git add --all", { encoding: "utf8" });
   execSync(`git commit -m ${nextVersion}`, { encoding: "utf8" });
   execSync("git push origin HEAD:main", { encoding: "utf8" });
 
-  Array.from(libs).map((workspace1) => {
-    const lib = workspaces.find(
-      (workspace2) => join(workspace2.root, workspace2.workspace) === workspace1
-    ).name;
-    return execSync(`yarn workspace ${lib} run lib:build`, { encoding: "utf8" });
-  });
-
   if (apps.size) setOutput("DOCKER", JSON.stringify(Array.from(apps)));
+  if (libs.size) setOutput("NPM", Array.from(libs).join(' '));
 } else console.log("no changes found");
 
 execSync(`git tag -d ${nextVersion}`, { encoding: "utf8" });
