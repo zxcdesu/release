@@ -28,8 +28,8 @@ jobs:
 
       - name: Login to GitHub
         run: |
-          git config --global user.email "xanedesu@gmail.com"
-          git config --global user.name "xanedesu"
+          git config --global user.email "ci@github.com"
+          git config --global user.name "ci"
 
       - name: Release
         id: release
