@@ -1,6 +1,6 @@
 {
   "name": "b",
-  "version": "v3.0.11",
+  "version": "v4.0.1",
   "scripts": {
     "lib:build": "echo \"building lib b...\"",
     "app:build": "echo \"building app b...\""
