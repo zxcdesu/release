@@ -68,8 +68,10 @@ console.log("next version is", nextVersion);
 
 const diff = execSync(
   `git --no-pager diff $(git describe --abbrev=0 --tags ${nextVersion}^) --minimal --name-only`,
+  {
+    encoding: "utf8"
+  },
 )
-  .toString("utf8")
   .trim()
   .split("\n");
 
@@ -102,22 +104,22 @@ console.log("updated libs", libs);
 console.log("updated apps", apps);
 
 if (libs.size + apps.size > 0) {
-  execSync("git add --all");
-  execSync(`git commit -m ${nextVersion}`);
-  execSync("git push origin HEAD:main");
+  execSync("git add --all", { encoding: "utf8" });
+  execSync(`git commit -m ${nextVersion}`, { encoding: "utf8" });
+  execSync("git push origin HEAD:main", { encoding: "utf8" });
 
   Array.from(libs).map((workspace1) => {
     const lib = workspaces.find(
       (workspace2) => join(workspace2.root, workspace2.workspace) === workspace1
     ).name;
-    return execSync(`yarn workspace ${lib} run lib:build`);
+    return execSync(`yarn workspace ${lib} run lib:build`, { encoding: "utf8" });
   });
 
   if (apps.size) setOutput("DOCKER", JSON.stringify(Array.from(apps)));
 } else console.log("no changes found");
 
-execSync(`git tag -d ${nextVersion}`);
-execSync(`git push --delete origin ${nextVersion}`);
+execSync(`git tag -d ${nextVersion}`, { encoding: "utf8" });
+execSync(`git push --delete origin ${nextVersion}`, { encoding: "utf8" });
 
-execSync(`git tag -a -m ${nextVersion} ${nextVersion}`);
-execSync(`git push origin ${nextVersion}`);
+execSync(`git tag -a -m ${nextVersion} ${nextVersion}`, { encoding: "utf8" });
+execSync(`git push origin ${nextVersion}`, { encoding: "utf8" });
